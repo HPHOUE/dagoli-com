@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dagoli — Coming Soon</title>
-  <meta name="description" content="Dagoli — something new is on its way.">
+  <meta name="description" content="Dagoli — noget nyt er på vej.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
@@ -86,7 +86,6 @@
   </style>
 </head>
 <body>
-
 <div class="logo-wrap">
   <div class="wheel-container">
     <svg id="wheel" class="wheel-svg" width="280" height="280" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
@@ -104,15 +103,17 @@
   </div>
   <p class="tagline">Something new is on its way</p>
   <div class="contact">
-    <a href="mailto:hallo@dagoli.com">hallo@dagoli.com</a>
+    <a id="mail">hej&#64;dagoli&#46;dk</a>
   </div>
 </div>
-
 <script>
+  var m = document.getElementById('mail');
+  m.href = 'mailto:' + 'hej' + '@' + 'dagoli' + '.' + 'dk';
+ 
   const dotsGroup = document.getElementById('dots');
   let angle = 0;
   let time = 0;
-
+ 
   function animate() {
     time += 0.012;
     const wave = Math.sin(time) * 0.5 + Math.sin(time * 2.3) * 0.25 + Math.sin(time * 0.4) * 0.3;
@@ -121,13 +122,13 @@
     angle += speed;
     const pulse = 1 + Math.sin(time * 3) * 0.04;
     dotsGroup.setAttribute('transform',
-      `rotate(${angle}, 140, 140) scale(${pulse}, ${pulse}) translate(${140*(1-pulse)}, ${140*(1-pulse)})`
+      'rotate(' + angle + ', 140, 140) scale(' + pulse + ', ' + pulse + ') translate(' + (140*(1-pulse)) + ', ' + (140*(1-pulse)) + ')'
     );
     requestAnimationFrame(animate);
   }
-
+ 
   animate();
 </script>
-
 </body>
 </html>
+ 
