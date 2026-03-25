@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dagoli — Coming Soon</title>
+  <meta name="description" content="Dagoli — something new is on its way.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: #ffffff;
+      font-family: 'Nunito', 'Varela Round', 'Helvetica Neue', sans-serif;
+      overflow: hidden;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      opacity: 0;
+      animation: fadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .wheel-container {
+      position: relative;
+      width: 280px;
+      height: 280px;
+    }
+    .wheel-svg {
+      position: absolute;
+      top: 0; left: 0;
+    }
+    .wordmark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+      font-weight: 700;
+      color: #2e2e2e;
+      letter-spacing: -1.5px;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .tagline {
+      margin-top: 2.8rem;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #aaaaaa;
+      opacity: 0;
+      animation: fadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+    }
+    .contact {
+      margin-top: 1.4rem;
+      opacity: 0;
+      animation: fadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+    }
+    .contact a {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #3399EE;
+      text-decoration: none;
+      border-bottom: 1.5px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .contact a:hover {
+      color: #2244CC;
+      border-bottom-color: #2244CC;
+    }
+  </style>
+</head>
+<body>
+
+<div class="logo-wrap">
+  <div class="wheel-container">
+    <svg id="wheel" class="wheel-svg" width="280" height="280" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+      <g id="dots">
+        <circle cx="140" cy="30"  r="7"  fill="#2244CC"/>
+        <circle cx="223" cy="65"  r="22" fill="#3399EE"/>
+        <circle cx="248" cy="158" r="15" fill="#22BBEE"/>
+        <circle cx="188" cy="234" r="26" fill="#22CCCC"/>
+        <circle cx="80"  cy="230" r="17" fill="#33CCAA"/>
+        <circle cx="30"  cy="148" r="11" fill="#55DD66"/>
+        <circle cx="68"  cy="58"  r="14" fill="#44EE55"/>
+      </g>
+    </svg>
+    <div class="wordmark">dagoli</div>
+  </div>
+  <p class="tagline">Something new is on its way</p>
+  <div class="contact">
+    <a href="mailto:hallo@dagoli.com">hallo@dagoli.com</a>
+  </div>
+</div>
+
+<script>
+  const dotsGroup = document.getElementById('dots');
+  let angle = 0;
+  let time = 0;
+
+  function animate() {
+    time += 0.012;
+    const wave = Math.sin(time) * 0.5 + Math.sin(time * 2.3) * 0.25 + Math.sin(time * 0.4) * 0.3;
+    let speed = 0.35 + wave * 0.6;
+    if (Math.sin(time * 0.17) > 0.92) speed *= 2.8;
+    angle += speed;
+    const pulse = 1 + Math.sin(time * 3) * 0.04;
+    dotsGroup.setAttribute('transform',
+      `rotate(${angle}, 140, 140) scale(${pulse}, ${pulse}) translate(${140*(1-pulse)}, ${140*(1-pulse)})`
+    );
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
+</body>
+</html>
